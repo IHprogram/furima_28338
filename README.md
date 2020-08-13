@@ -39,21 +39,6 @@
 - has_one :receiver
 - has_one :carrier
 
-## carriers テーブル
-
-| Column              | Type       | Options                        |
-| ------------------- | ---------- | ------------------------------ |
-| date_of_shipment    | string     | null: false                    |
-| delivery_fee        | string     | null: false                    |
-| prefecture          | string     | null: false                    |
-| user_id             | references | null: false, foreign_key: true |
-| item_id             | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :item
-
 ## receivers テーブル
 
 | Column        | Type       | Options                        |
