@@ -48,7 +48,7 @@
 
 ### Association
 
-- has_many :receivers
+- has_one :receiver
 - belongs_to :user
 - belongs_to :item
 
