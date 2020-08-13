@@ -30,7 +30,6 @@
 | status        | string     | null: false                    |
 | price         | integer    | null: false                    |
 | user_id       | references | null: false, foreign_key: true |
-| user_nickname | references | null: false, foreign_key: true |
 
 ### Association
 
