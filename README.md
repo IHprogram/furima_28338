@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :carriers
+- has_many :buyers
 - has_many :receivers
 
 ## items テーブル
@@ -37,7 +37,20 @@
 
 - belongs_to :user
 - has_one :receiver
-- has_one :carrier
+- has_one :buyer
+
+## buyers テーブル
+
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| user_id       | references | null: false, foreign_key: true |
+| item_id       | references | null: false, foreign_key: true |
+
+### Association
+
+- has_many :receivers
+- belongs_to :user
+- belongs_to :item
 
 ## receivers テーブル
 
@@ -51,8 +64,10 @@
 | phone_number  | integer    | null: false                    |
 | user_id       | references | null: false, foreign_key: true |
 | item_id       | references | null: false, foreign_key: true |
+| buyer_id      | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- belongs_to :buyer
