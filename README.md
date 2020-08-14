@@ -17,7 +17,6 @@
 
 - has_many :items
 - has_many :buyers
-- has_many :receivers
 
 ## items テーブル
 
@@ -36,7 +35,6 @@
 ### Association
 
 - belongs_to :user
-- has_one :receiver
 - has_one :buyer
 
 ## buyers テーブル
@@ -66,6 +64,4 @@
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
 - belongs_to :buyer
