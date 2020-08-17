@@ -15,13 +15,12 @@ class User < ApplicationRecord
     validates :family_name
   end
 
-  
+  with_options presence: true, format:{ with: /\A[ァ-ン]+\z/, message: 'Full-width katakana characters' } do
     validates :first_name_furigana
     validates :family_name_furigana
+  end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'Include both letters and numbers' 
-
-
 
 end
