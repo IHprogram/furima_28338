@@ -9,10 +9,15 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true
   validates :birth_day, presence: true
-  validates :first_name, presence: true
-  validates :family_name, presence: true
-  validates :first_name_furigana, presence: true
-  validates :family_name_furigana, presence: true
+
+  with_options presence: true, format:{ with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'Full-width characters' } do
+    validates :first_name
+    validates :family_name
+  end
+
+  
+    validates :first_name_furigana
+    validates :family_name_furigana
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX, message: 'Include both letters and numbers' 
