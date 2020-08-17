@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :items
   has_many :buyers
 
-  validates :nickname, presence: true
+  validates :nickname, presence: true, uniqueness: true
   validates :birth_day, presence: true
 
   with_options presence: true, format:{ with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'Full-width characters' } do
