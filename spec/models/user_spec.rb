@@ -71,17 +71,17 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Nickname has already been taken')
     end
 
+    it 'emailに@が含まれていない場合、保存できないこと' do
+      @user.email = 'sampletest.com'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+
     it '重複したemailが存在する場合登録できないこと' do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)
       another_user.valid?
       expect(another_user.errors.full_messages).to include('Email has already been taken')
-    end
-
-    it 'passwordが6文字以上であれば登録できること' do
-      @user.password = 'a12345'
-      @user.password_confirmation = 'a12345'
-      expect(@user).to be_valid
     end
 
     it 'passwordが5文字以下であれば登録できないこと' do
