@@ -7,17 +7,14 @@ class User < ApplicationRecord
   has_many :items
   has_many :buyers
 
-  validates :nickname, presence: true, uniqueness: true
-  validates :birth_day, presence: true
-
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'Full-width characters' } do
-    validates :first_name
-    validates :family_name
-  end
-
-  with_options presence: true, format: { with: /\A[ァ-ン]+\z/, message: 'Full-width katakana characters' } do
-    validates :first_name_furigana
-    validates :family_name_furigana
+  
+  with_options presence: true do
+    validates :nickname, uniqueness: true
+    validates :birth_day 
+    validates :first_name,           format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: 'Full-width characters'}
+    validates :family_name,          format: {with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'Full-width characters'}
+    validates :first_name_furigana,  format: {with: /\A[ァ-ン]+\z/, message: 'Full-width katakana characters'}
+    validates :family_name_furigana, format: {with: /\A[ァ-ン]+\z/, message: 'Full-width katakana characters'}
   end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
