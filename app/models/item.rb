@@ -18,6 +18,6 @@ class Item < ApplicationRecord
   validates :prefecture_id,   numericality: { other_than: 1 } 
 
     #空欄では保存できないようにする
-    validates :name, :content, :price, :category, :status, :shippingdate, :fee, :prefecture, presence: true
+    validates :name, :content, :price, :category, :status, :shippingdate, :fee, :prefecture, :image, presence: true
 
 end
