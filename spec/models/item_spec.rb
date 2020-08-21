@@ -6,7 +6,7 @@ RSpec.describe Item, type: :model do
       @item = FactoryBot.build(:item)
       @item.image = fixture_file_upload('public/images/sample.png')
     end
-    
+
     it 'name,content,category_id,status_id,shippingdate_id,fee_id,prefecture_id,priceが存在すれば登録できること' do
       expect(@item).to be_valid
     end
@@ -38,43 +38,43 @@ RSpec.describe Item, type: :model do
     it 'categoryは「---」を選択すると登録できないこと' do
       @item.category_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category Select")
+      expect(@item.errors.full_messages).to include('Category Select')
     end
 
     it 'statusは「---」を選択すると登録できないこと' do
       @item.status_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Status Select")
+      expect(@item.errors.full_messages).to include('Status Select')
     end
 
     it 'feeは「---」を選択すると登録できないこと' do
       @item.fee_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Fee Select")
+      expect(@item.errors.full_messages).to include('Fee Select')
     end
 
     it 'prefectureは「---」を選択すると登録できないこと' do
       @item.prefecture_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Prefecture Select")
+      expect(@item.errors.full_messages).to include('Prefecture Select')
     end
 
     it 'shippingdateは「---」を選択すると登録できないこと' do
       @item.shippingdate_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Shippingdate Select")
+      expect(@item.errors.full_messages).to include('Shippingdate Select')
     end
-    
+
     it 'priceが300円未満なら登録できないこと' do
       @item.price = 299
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Out of setting range")
+      expect(@item.errors.full_messages).to include('Price Out of setting range')
     end
 
     it 'priceが9999999円より高いなら登録できないこと' do
-      @item.price = 10000000
+      @item.price = 10_000_000
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price Out of setting range")
+      expect(@item.errors.full_messages).to include('Price Out of setting range')
     end
   end
 end
