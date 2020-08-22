@@ -132,7 +132,7 @@
       <% if @items.length > 0 %>
         <% @items.each do |item| %>
           <li class='list'>
-            <%= link_to "#" do %>
+            <%= link_to item_path(item.id), method: :get do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
                 <%# 商品が売れていればsold outの表示 %>
@@ -180,7 +180,7 @@
     </ul>
   </div>
   <%# //商品一覧 %>
-  
+
 </div>
 <% if user_signed_in? %>
   <%= link_to new_item_path do %>
