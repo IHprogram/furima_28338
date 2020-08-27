@@ -1,4 +1,5 @@
 class BuyersController < ApplicationController
+  before_action :move_to_index
 
   def index
     @item = Item.find(params[:item_id])
@@ -29,6 +30,10 @@ class BuyersController < ApplicationController
       card: buyer_params[:token],
       currency:'jpy'
     )
+  end
+
+  def move_to_index
+    redirect_to new_user_session_path unless user_signed_in?
   end
 
 end
