@@ -1,4 +1,5 @@
 class BuyersController < ApplicationController
+  before_action :move_to_login
   before_action :move_to_index
 
   def index
@@ -32,8 +33,15 @@ class BuyersController < ApplicationController
     )
   end
 
-  def move_to_index
+  def move_to_login
     redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if user_signed_in? && current_user.id == @item.user_id
+      redirect_to root_path       
+    end
   end
 
 end
