@@ -38,6 +38,9 @@ const pay = () => {
 
         document.getElementById("charge-form").submit();
         document.getElementById("charge-form").reset();
+
+        alert("カード情報を正しく入力してください")
+        alert("住所情報を正しく入力してください")
       }
     });
   });
