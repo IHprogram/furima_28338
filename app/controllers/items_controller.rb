@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @buyer = Buyer.where("item_id = #{@item.id}")
   end
 
   def edit
