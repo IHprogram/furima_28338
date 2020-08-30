@@ -1,14 +1,13 @@
 class BuyersController < ApplicationController
   before_action :move_to_login
   before_action :move_to_index, expect: [:index]
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @buyer = BuyerReceiver.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buyer = BuyerReceiver.new(buyer_params)
     if @buyer.valid?
       pay_item
@@ -37,6 +36,10 @@ class BuyersController < ApplicationController
 
   def move_to_login
     redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def move_to_index
