@@ -1,6 +1,6 @@
 class BuyersController < ApplicationController
   before_action :move_to_login
-  before_action :move_to_index
+  before_action :move_to_index, expect: [:index]
 
   def index
     @item = Item.find(params[:item_id])
@@ -41,9 +41,14 @@ class BuyersController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
+    @buyers = Buyer.all
     if user_signed_in? && current_user.id == @item.user_id
-      redirect_to root_path       
+      redirect_to root_path
+    end    
+    @buyers.each do |buyer|
+      if item_buyers_path(@item.id) == item_buyers_path(buyer.item_id)
+        return redirect_to root_path
+      end
     end
   end
-
 end
