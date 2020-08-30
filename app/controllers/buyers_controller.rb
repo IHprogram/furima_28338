@@ -13,7 +13,7 @@ class BuyersController < ApplicationController
     if @buyer.valid?
       pay_item
       @buyer.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render 'index'
     end
@@ -27,11 +27,11 @@ class BuyersController < ApplicationController
 
   def pay_item
     item = Item.find(params[:item_id])
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: item.price,
       card: params[:token],
-      currency:'jpy'
+      currency: 'jpy'
     )
   end
 
@@ -42,13 +42,9 @@ class BuyersController < ApplicationController
   def move_to_index
     @item = Item.find(params[:item_id])
     @buyers = Buyer.all
-    if user_signed_in? && current_user.id == @item.user_id
-      redirect_to root_path
-    end    
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user_id
     @buyers.each do |buyer|
-      if item_buyers_path(@item.id) == item_buyers_path(buyer.item_id)
-        return redirect_to root_path
-      end
+      return redirect_to root_path if item_buyers_path(@item.id) == item_buyers_path(buyer.item_id)
     end
   end
 end

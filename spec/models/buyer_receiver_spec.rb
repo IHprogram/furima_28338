@@ -25,7 +25,7 @@ RSpec.describe BuyerReceiver, type: :model do
     it 'prefecture_idが「1」では登録できないこと' do
       @buyer_receiver.prefecture_id = 1
       @buyer_receiver.valid?
-      expect(@buyer_receiver.errors.full_messages).to include("Prefecture Select")
+      expect(@buyer_receiver.errors.full_messages).to include('Prefecture Select')
     end
 
     it 'cityが空では登録できないこと' do
@@ -51,24 +51,22 @@ RSpec.describe BuyerReceiver, type: :model do
       expect(@buyer_receiver).to be_valid
     end
 
-
     it 'postal_codeが半角のハイフンを含んだ正しい形式でないと登録できないこと' do
       @buyer_receiver.postal_code = '1234567'
       @buyer_receiver.valid?
-      expect(@buyer_receiver.errors.full_messages).to include("Postal code input correctly")
+      expect(@buyer_receiver.errors.full_messages).to include('Postal code input correctly')
     end
 
     it 'phone_numberが全角だと登録できないこと' do
       @buyer_receiver.phone_number = '０９０１２３４５６７８'
       @buyer_receiver.valid?
-      expect(@buyer_receiver.errors.full_messages).to include("Phone number Half-width number")
+      expect(@buyer_receiver.errors.full_messages).to include('Phone number Half-width number')
     end
 
     it 'phone_numberがハイフンを含むと登録できないこと' do
       @buyer_receiver.phone_number = '090-1234567'
       @buyer_receiver.valid?
-      expect(@buyer_receiver.errors.full_messages).to include("Phone number Half-width number")
+      expect(@buyer_receiver.errors.full_messages).to include('Phone number Half-width number')
     end
-
   end
 end
